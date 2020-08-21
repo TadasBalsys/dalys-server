@@ -21,16 +21,17 @@ const modelSchema = new Schema({
     type: String,
     required: true,
   },
-  modelFullName: {
-    type: String,
-    get: modelName(
-      this.make.makeName,
-      this.model,
-      this.productionStart,
-      this.productionEnd
-    ),
-    required: true,
-  },
+  // Crashes
+  // modelFullName: {
+  //   type: String,
+  //   get: modelName(
+  //     this.make.makeName,
+  //     this.model,
+  //     this.productionStart,
+  //     this.productionEnd
+  //   ),
+  //   required: true,
+  // }, 
   productionStart: {
     type: String,
     required: true,

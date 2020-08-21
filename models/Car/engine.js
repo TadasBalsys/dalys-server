@@ -30,11 +30,12 @@ const engineSchema = new Schema({
     type: String,
     required: true,
   },
-  engineFullName: {
-    type: String,
-    get: engineName(this.engine, this.productionStart, this.productionEnd),
-    required: true,
-  },
+  // Crashes
+  // engineFullName: {
+  //   type: String,
+  //   get:  engineName(this.engine, this.productionStart, this.productionEnd),
+  //   required: true,
+  // },
   models: [
     {
       type: Schema.Types.ObjectId,

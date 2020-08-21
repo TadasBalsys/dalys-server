@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const carSchema = require("./car");
-const powerSchema = require("./engine");
+const mongoose = require('mongoose');
+const carSchema = require('./car');
+const powerSchema = require('./engine');
 
 const Schema = mongoose.Schema;
 
@@ -33,13 +33,13 @@ const partSchema = new Schema({
   },
 
   // detalės subkategorija
-  subCategory: categorySchema.add({
-    subCategory: {
-      type: categorySchema,
-      required: true,
-      unique: true,
-    },
-  }),
+  // subCategory: categorySchema.add({
+  //   subCategory: {
+  //     type: categorySchema,
+  //     required: true,
+  //     unique: true,
+  //   },
+  // }),
 
   // detalės gamintojo kodų masyvas
   codes: [
@@ -53,11 +53,11 @@ const partSchema = new Schema({
   car: {
     // jeigu detalė yra iš pardavėjo įvesto ardomo automobilio - to automobilio ID
     // tokiu atveju likusieji laukai užpildomi iš to automobilio
-    carId: {
-      type: carSchema,
-      required: false,
-      unique: true,
-    },
+    // carId: {
+    //   type: carSchema,
+    //   required: false,
+    //   unique: true,
+    // },
 
     // automobilio markė
     make: {
@@ -74,7 +74,7 @@ const partSchema = new Schema({
     // automobilio variklio modelio ID, jei žinomas
     engine: {
       type: Schema.Types.ObjectId,
-      ref: "Engine",
+      ref: 'Engine',
     },
 
     // automobilio variklio tūris (kubiniais centimetrais - cm3)
@@ -85,7 +85,11 @@ const partSchema = new Schema({
 
     // automobilio variklio galingumas
     enginePower: {
+      //FIXME: Crashes
       type: powerSchema,
+      // When type: Schema.Types.ObjectId, with ref: 'Engine' server is not crashing
+      // type: Schema.Types.ObjectId,
+      // ref: 'Engine',
       required: false,
     },
 
@@ -93,15 +97,15 @@ const partSchema = new Schema({
     fuel: {
       type: String,
       enum: [
-        "diesel",
-        "gasoline",
-        "gasoline_gas",
-        "gasoline_electricity",
-        "electricity",
-        "diesel_electricity",
-        "diesel_gas",
-        "bioethanol",
-        "other",
+        'diesel',
+        'gasoline',
+        'gasoline_gas',
+        'gasoline_electricity',
+        'electricity',
+        'diesel_electricity',
+        'diesel_gas',
+        'bioethanol',
+        'other',
       ],
       required: false,
     },
@@ -115,14 +119,14 @@ const partSchema = new Schema({
     // automobilio vairo padėtis, pasirenkama iš sąrašo
     steeringWheelPosition: {
       type: String,
-      enum: ["left", "right"],
+      enum: ['left', 'right'],
       required: false,
     },
 
     // automobilio pavarų dėžės tipas, pasirenkamas iš sąrašo
     transmission: {
       type: String,
-      enum: ["manual", "automatic"],
+      enum: ['manual', 'automatic'],
       required: false,
     },
 
@@ -130,18 +134,18 @@ const partSchema = new Schema({
     bodyType: {
       type: String,
       enum: [
-        "other",
-        "sedan",
-        "hatchback",
-        "caravan",
-        "minivan",
-        "suv",
-        "coupe",
-        "commercial",
-        "cabriolet",
-        "roadster",
-        "limousine",
-        "pickup",
+        'other',
+        'sedan',
+        'hatchback',
+        'caravan',
+        'minivan',
+        'suv',
+        'coupe',
+        'commercial',
+        'cabriolet',
+        'roadster',
+        'limousine',
+        'pickup',
       ],
       required: false,
     },
@@ -149,7 +153,7 @@ const partSchema = new Schema({
     // automobilio varomieji ratai, pasirenkama iš sąrašo
     drivingWheels: {
       type: String,
-      enum: ["front", "rear", "all"],
+      enum: ['front', 'rear', 'all'],
       required: false,
     },
 
@@ -157,18 +161,18 @@ const partSchema = new Schema({
     carColor: {
       type: String,
       enum: [
-        "black",
-        "grey",
-        "white",
-        "violet",
-        "blue",
-        "green",
-        "yellow",
-        "orange",
-        "red",
-        "brown",
-        "mixed",
-        "other",
+        'black',
+        'grey',
+        'white',
+        'violet',
+        'blue',
+        'green',
+        'yellow',
+        'orange',
+        'red',
+        'brown',
+        'mixed',
+        'other',
       ],
       required: false,
     },
@@ -184,14 +188,14 @@ const partSchema = new Schema({
   position: {
     type: String,
     enum: [
-      "front",
-      "rear",
-      "left",
-      "right",
-      "front_left",
-      "front_right",
-      "rear_left",
-      "rear_right",
+      'front',
+      'rear',
+      'left',
+      'right',
+      'front_left',
+      'front_right',
+      'rear_left',
+      'rear_right',
     ],
     required: false,
   },
@@ -203,13 +207,13 @@ const partSchema = new Schema({
   },
 
   // detalės kaina be PVM, kuri paskaičiuojama iš pardavėjo įvestos kainos
-  priceWithoutVAT: {
-    type: Number,
-    required: true,
-    default: function () {
-      return this.price / 1.21;
-    },
-  },
+  // priceWithoutVAT: {
+  //   type: Number,
+  //   required: true,
+  //   default: function () {
+  //     return this.price / 1.21;
+  //   },
+  // },
 
   // detalės kaina, kurią įveda pardavėjas
   price: {
@@ -228,14 +232,14 @@ const partSchema = new Schema({
   // detalės būklė, pasirenkama iš sąrašo
   condition: {
     type: String,
-    enum: ["new", "used", "refurbished"],
+    enum: ['new', 'used', 'refurbished'],
     required: true,
   },
 
   // detalės prieinamumo pirkėjui tipas, pasirenkamas iš sąrašo
   status: {
     type: String,
-    enum: ["unavailable", "available", "reserved", "sold"],
+    enum: ['unavailable', 'available', 'reserved', 'sold'],
     required: true,
   },
 
@@ -267,4 +271,4 @@ const partSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Part", partSchema);
+module.exports = mongoose.model('Part', partSchema);

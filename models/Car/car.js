@@ -33,10 +33,10 @@ const carSchema = new Schema({
       type: Number,
       required: true,
     },
-    enginePower: {
-      type: powerSchema,
-      required: true,
-    },
+    // enginePower: {
+    //   type: powerSchema,
+    //   required: true,
+    // },
   },
   productionYear: {
     type: String,
