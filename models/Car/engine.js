@@ -1,10 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-
-function engineName(engine, start, end) {
-  return `${engine} (${start} - ${end})`;
-}
 
 const powerSchema = new Schema({
   kWh: {
@@ -31,15 +27,10 @@ const engineSchema = new Schema(
       type: String,
       required: true,
     },
-    engineFullName: {
-      type: String,
-      get: engineName(this.engine, this.productionStart, this.productionEnd),
-      required: true,
-    },
     models: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Model",
+        ref: 'Model',
       },
     ],
     power: {
@@ -53,27 +44,33 @@ const engineSchema = new Schema(
     fuelType: {
       type: String,
       enum: [
-        "diesel",
-        "gasoline",
-        "gasoline_gas",
-        "gasoline_electricity",
-        "electricity",
-        "diesel_electricity",
-        "diesel_gas",
-        "bioethanol",
-        "other",
+        'diesel',
+        'gasoline',
+        'gasoline_gas',
+        'gasoline_electricity',
+        'electricity',
+        'diesel_electricity',
+        'diesel_gas',
+        'bioethanol',
+        'other',
       ],
       required: true,
     },
     cars: [
       {
-        type: Schema.ectId,
-        ref: "Car",
+        type: Schema.Types.ObjectId,
+        ref: 'Car',
       },
     ],
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Engine", engineSchema);
-module.exports = mongoose.model("Power", powerSchema);
+engineSchema.method('engineFullName', function () {
+  return `${this.engine} (${this.productionStart} - ${this.productionEnd})`;
+});
+
+module.exports = {
+  Engine: mongoose.model('Engine', engineSchema),
+  Power: mongoose.model('Power', powerSchema),
+};

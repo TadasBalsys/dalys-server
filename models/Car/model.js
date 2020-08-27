@@ -1,16 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-
-function modelName(make, model, start, end) {
-  return `${make} ${model} (${start} - ${end})`;
-}
 
 const modelSchema = new Schema({
   make: {
     makeID: {
       type: Schema.Types.ObjectId,
-      ref: "Make",
+      ref: 'Make',
     },
     makeName: {
       type: String,
@@ -19,16 +15,6 @@ const modelSchema = new Schema({
   },
   model: {
     type: String,
-    required: true,
-  },
-  modelFullName: {
-    type: String,
-    get: modelName(
-      this.make.makeName,
-      this.model,
-      this.productionStart,
-      this.productionEnd
-    ),
     required: true,
   },
   productionStart: {
@@ -42,15 +28,19 @@ const modelSchema = new Schema({
   engines: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Engine",
+      ref: 'Engine',
     },
   ],
   cars: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Car",
+      ref: 'Car',
     },
   ],
 });
 
-module.exports = mongoose.model("Model", modelSchema);
+modelSchema.method('getModelFullName', function () {
+  return `${this.make.makeName} ${this.model} (${this.productionStart} - ${this.productionEnd})`;
+});
+
+module.exports = mongoose.model('Model', modelSchema);
