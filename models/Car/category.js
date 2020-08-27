@@ -1,8 +1,49 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
 // kategorijos schema
+
+const partNamesSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  SubCategory: {
+    SubCategoryID: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+    },
+    SubCategoryName: {
+      type: String,
+      required: true,
+    },
+  },
+});
+
+const SubCategorySchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  category: {
+    categoryID: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+    },
+    categoryName: {
+      type: String,
+      required: true,
+    },
+  },
+  partNames: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'PartNames',
+    },
+  ],
+});
+
 const categorySchema = new Schema({
   name: {
     type: String,
@@ -15,51 +56,16 @@ const categorySchema = new Schema({
   subcategories: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Subcategory",
+      ref: 'SubCategory',
     },
   ],
 });
 
-const subcategorySchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  category: {
-    categoryID: {
-      type: Schema.Types.ObjectId,
-      ref: "Category",
-    },
-    categoryName: {
-      type: String,
-      required: true,
-    },
-  },
-  partNames: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "PartNames",
-    },
-  ],
-});
-
-const partNamesSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  subcategory: {
-    subcategoryID: {
-      type: Schema.Types.ObjectId,
-      ref: "Category",
-    },
-    subcategoryName: {
-      type: String,
-      required: true,
-    },
-  },
-});
-
-module.exports = mongoose.model("Category", categorySchema);
-module.exports = mongoose.model("Subcategory", subcategorySchema);
-module.exports = mongoose.model("PartName", partNamesSchema);
+module.exports = {
+  Category: mongoose.model('Category', categorySchema),
+  SubCategory: mongoose.model('SubCategory', SubCategorySchema),
+  PartName: mongoose.model('PartName', partNamesSchema),
+  CategorySchema: categorySchema,
+  SubCategorySchema: SubCategorySchema,
+  PartNameSchema: partNamesSchema,
+};

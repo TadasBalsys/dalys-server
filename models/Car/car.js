@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const powerSchema = require("./engine");
+const mongoose = require('mongoose');
+const { Power, powerSchema } = require('./engine');
 
 const Schema = mongoose.Schema;
 
@@ -7,7 +7,7 @@ const carSchema = new Schema({
   model: {
     modelId: {
       type: Schema.Types.ObjectId,
-      ref: "Model",
+      ref: 'Model',
       required: true,
     },
     modelName: {
@@ -22,7 +22,7 @@ const carSchema = new Schema({
   engine: {
     engineId: {
       type: Schema.Types.ObjectId,
-      ref: "Engine",
+      ref: 'Engine',
       required: false,
     },
     engineFuel: {
@@ -45,52 +45,52 @@ const carSchema = new Schema({
   color: {
     type: String,
     enum: [
-      "black",
-      "grey",
-      "white",
-      "violet",
-      "blue",
-      "green",
-      "yellow",
-      "orange",
-      "red",
-      "brown",
-      "mixed",
-      "other",
+      'black',
+      'grey',
+      'white',
+      'violet',
+      'blue',
+      'green',
+      'yellow',
+      'orange',
+      'red',
+      'brown',
+      'mixed',
+      'other',
     ],
     required: false,
   },
   steeringWheelPosition: {
     type: String,
-    enum: ["left", "right"],
+    enum: ['left', 'right'],
     required: false,
   },
   transmission: {
     type: String,
-    enum: ["manual", "automatic"],
+    enum: ['manual', 'automatic'],
     required: false,
   },
   bodyType: {
     type: String,
     enum: [
-      "other",
-      "sedan",
-      "hatchback",
-      "caravan",
-      "minivan",
-      "suv",
-      "coupe",
-      "commercial",
-      "cabriolet",
-      "roadster",
-      "limousine",
-      "pickup",
+      'other',
+      'sedan',
+      'hatchback',
+      'caravan',
+      'minivan',
+      'suv',
+      'coupe',
+      'commercial',
+      'cabriolet',
+      'roadster',
+      'limousine',
+      'pickup',
     ],
     required: false,
   },
   drivingWheels: {
     type: String,
-    enum: ["front", "rear", "all", "four"],
+    enum: ['front', 'rear', 'all', 'four'],
     required: false,
   },
   photoUrls: [
@@ -103,7 +103,7 @@ const carSchema = new Schema({
     {
       partId: {
         type: Schema.Types.ObjectId,
-        ref: "Part",
+        ref: 'Part',
       },
       name: {
         type: String,
@@ -114,4 +114,8 @@ const carSchema = new Schema({
   ],
 });
 
-module.exports = mongoose.model("Car", carSchema);
+// module.exports = mongoose.model('Car', carSchema);
+module.exports = {
+  Car: mongoose.model('Car', carSchema),
+  carSchema: carSchema
+};

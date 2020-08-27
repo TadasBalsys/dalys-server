@@ -8,6 +8,7 @@ const app = express();
 // Models
 const Test = require('./models/test/testSchema');
 const Model = require('./models/Car/model');
+const Part = require('./models/Car/part');
 
 // Controllers
 const { saveEngine } = require('./controllers/engine');

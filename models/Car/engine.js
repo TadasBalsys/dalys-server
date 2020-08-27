@@ -73,4 +73,6 @@ engineSchema.method('engineFullName', function () {
 module.exports = {
   Engine: mongoose.model('Engine', engineSchema),
   Power: mongoose.model('Power', powerSchema),
+  powerSchema: powerSchema,
+  engineSchema: engineSchema
 };
