@@ -20,24 +20,24 @@ const partSchema = new Schema(
     },
 
     // detalės kategorija
-    category: {
-      type: CategorySchema,
-      required: true,
-      unique: true,
-    },
+    // category: {
+    //   type: CategorySchema,
+    //   required: true,
+    //   // unique: true,
+    // },
 
-    // detalės subkategorija
-    subcategory: {
-      type: SubCategorySchema,
-      required: true,
-      unique: true,
-    },
+    // // detalės subkategorija
+    // subcategory: {
+    //   type: SubCategorySchema,
+    //   required: true,
+    //   // unique: true,
+    // },
 
     // detalės pavadinimas (sub-subkategorija)
     partName: {
-      type: PartNameSchema,
+      type: String,
       required: true,
-      unique: true,
+      // unique: true,
     },
     // detalių kodai
     codes: [

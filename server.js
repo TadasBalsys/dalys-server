@@ -11,7 +11,8 @@ const Model = require('./models/Car/model');
 const Part = require('./models/Car/part');
 
 // Controllers
-const { saveEngine } = require('./controllers/engine');
+const { addEngine } = require('./controllers/engine');
+const { addPart } = require('./controllers/part');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -58,6 +59,8 @@ app.post('/model', async (req, res) => {
   }
 });
 
-app.post('/engine', saveEngine);
+app.post('/engine', addEngine);
+
+app.post('/part', addPart);
 
 app.listen(PORT, (req, res) => console.log(`server is running on ${PORT}`));

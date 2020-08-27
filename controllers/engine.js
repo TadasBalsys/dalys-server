@@ -1,6 +1,6 @@
 const { Power, Engine } = require('../models/Car/engine');
 
-const saveEngine = async (req, res) => {
+const addEngine = async (req, res) => {
   const {
     engine,
     productionStart,
@@ -30,4 +30,4 @@ const saveEngine = async (req, res) => {
   }
 };
 
-module.exports = { saveEngine };
+module.exports = { addEngine };

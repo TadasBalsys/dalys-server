@@ -12,7 +12,7 @@ const partNamesSchema = new Schema({
   SubCategory: {
     SubCategoryID: {
       type: Schema.Types.ObjectId,
-      ref: 'Category',
+      ref: 'SubCategory',
     },
     SubCategoryName: {
       type: String,
