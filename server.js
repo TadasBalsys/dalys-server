@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
@@ -16,7 +17,7 @@ const { addPart } = require('./controllers/part');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(cors());
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  MongoDB  >>>>>>>>>>>>>>>>>>>>>>>>
 
 const mongoURL = `mongodb+srv://${process.env.MONGOUSER}:${process.env.MONGOPSW}@dalys-server.cefjm.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
