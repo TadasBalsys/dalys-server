@@ -16,28 +16,24 @@ const partSchema = new Schema(
     productCode: {
       type: String,
       required: true,
-      unique: true,
     },
 
     // detalės kategorija
     // category: {
     //   type: CategorySchema,
     //   required: true,
-    //   // unique: true,
     // },
 
     // // detalės subkategorija
     // subcategory: {
     //   type: SubCategorySchema,
     //   required: true,
-    //   // unique: true,
     // },
 
     // detalės pavadinimas (sub-subkategorija)
     partName: {
       type: String,
       required: true,
-      // unique: true,
     },
     // detalių kodai
     codes: [
@@ -54,7 +50,6 @@ const partSchema = new Schema(
       carId: {
         type: carSchema,
         required: false,
-        unique: true,
       },
 
       // automobilio markė
