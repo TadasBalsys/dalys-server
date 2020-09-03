@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const MongoClient = require('mongodb').MongoClient;
 
 const app = express();
 
@@ -13,7 +14,7 @@ const Part = require('./models/Car/part');
 
 // Controllers
 const { addEngine } = require('./controllers/engine');
-const { addPart } = require('./controllers/part');
+const { addPart, getData } = require('./controllers/part');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -21,6 +22,23 @@ app.use(cors());
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  MongoDB  >>>>>>>>>>>>>>>>>>>>>>>>
 
 const mongoURL = `mongodb+srv://${process.env.MONGOUSER}:${process.env.MONGOPSW}@dalys-server.cefjm.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<  MongoDB Driver >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// TODO: For testing
+
+// MongoClient.connect(mongoURL, (err, client) => {
+//   if (err) console.log(`Error: ${err}`);
+//   const db = client.db('dalys-server');
+//   // insert all app routes, etc.
+
+//   /**
+//     app.use()
+//     app.get()
+//     app.post()
+//     app.listen()
+//    */
+// });
 
 mongoose
   .connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -63,5 +81,22 @@ app.post('/model', async (req, res) => {
 app.post('/engine', addEngine);
 
 app.post('/part', addPart);
+
+app.get('/get-data', getData);
+
+//  app.get('/get-data', async (req, res) => {
+//    const data = await db.collection('Categories').find().toArray();
+//    // console.log(data)
+//    // res.send('get data log')
+//    res.send(
+//      data
+//        .map((product) => {
+//          `
+//       <h5>${product}</h5>
+//       `;
+//        })
+//        .join(' ')
+//    );
+//  });
 
 app.listen(PORT, (req, res) => console.log(`server is running on ${PORT}`));
