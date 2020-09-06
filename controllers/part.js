@@ -1,9 +1,3 @@
-const {
-  CategorySchema,
-  SubCategorySchema,
-  PartNameSchema,
-} = require('../models/Car/category');
-
 const Part = require('../models/Car/part.js');
 const { Category } = require('../models/Car/category.js');
 
@@ -23,11 +17,10 @@ const addPart = async (req, res) => {
 };
 
 //TODO: For test, delete if no more needed
-const getData = async (req, res) => {
+const getCat = async (req, res) => {
   try {
-    const data = await Category.findById('5f466880021993e16ff3a59c');
-    console.log(data);
-    res.send('Success')
+    const data = await Category.find({});
+    res.send(data)
   } catch (error) {
     console.log(error);
   }
@@ -35,5 +28,5 @@ const getData = async (req, res) => {
 
 module.exports = {
   addPart: addPart,
-  getData: getData,
+  getCat: getCat,
 };

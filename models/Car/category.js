@@ -36,12 +36,7 @@ const SubCategorySchema = new Schema({
       required: true,
     },
   },
-  partNames: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'PartNames',
-    },
-  ],
+  partNames: [partNamesSchema],
 });
 
 const categorySchema = new Schema({
@@ -53,12 +48,7 @@ const categorySchema = new Schema({
     type: String,
     required: true,
   },
-  subcategories: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'SubCategory',
-    },
-  ],
+  subcategories: [SubCategorySchema],
 });
 
 module.exports = {

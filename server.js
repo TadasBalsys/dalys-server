@@ -14,7 +14,7 @@ const Part = require('./models/Car/part');
 
 // Controllers
 const { addEngine } = require('./controllers/engine');
-const { addPart, getData } = require('./controllers/part');
+const { addPart, getCat } = require('./controllers/part');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -82,7 +82,7 @@ app.post('/engine', addEngine);
 
 app.post('/part', addPart);
 
-app.get('/get-data', getData);
+app.get('/get-cat', getCat);
 
 //  app.get('/get-data', async (req, res) => {
 //    const data = await db.collection('Categories').find().toArray();
